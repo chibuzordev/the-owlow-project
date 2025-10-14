@@ -5,7 +5,7 @@ Heavy components are imported lazily inside the endpoint handlers.
 """
 
 from __future__ import annotations
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Body
 from pydantic import BaseModel
 from typing import Optional, Dict, Any
 import importlib
@@ -76,4 +76,5 @@ def run_pipeline(payload: RunPipelinePayload = Body(...)):
         },
         "sample": sample
     }
+
 
