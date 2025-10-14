@@ -25,9 +25,9 @@ def health() -> Dict[str, Any]:
     """Simple health check that is safe to run on startup."""
     return {"status": "ok", "service": "The Owlow Project", "llm_enabled": cfg.LLM_ENABLED}
 
-@app.post("/run_pipeline")
+@app.post("/run_pipeline", response_model=dict)
 @timeit
-def run_pipeline(payload: RunPipelinePayload):
+def run_pipeline(payload: RunPipelinePayload = Body(...)):
     """
     Orchestrates the pipeline.
     We import modules lazily here so that importing server doesn't load heavy ML models.
@@ -76,3 +76,4 @@ def run_pipeline(payload: RunPipelinePayload):
         },
         "sample": sample
     }
+
