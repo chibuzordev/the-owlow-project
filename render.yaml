@@ -1,0 +1,20 @@
+# render.yaml - Render's service configuration (Docker)
+services:
+  - type: web
+    name: owlow-project
+    env: docker
+    plan: free
+    dockerfilePath: Dockerfile
+    envVars:
+      - key: HOST
+        value: "0.0.0.0"
+      - key: PORT
+        value: "8000"
+      - key: LLM_ENABLED
+        value: "false"
+      - key: OWL_API_URL
+        value: "https://example.com/api/listings"
+    healthCheckPath: "/health"
+    autoDeploy: true
+    instanceCount: 1
+    disk: 512
