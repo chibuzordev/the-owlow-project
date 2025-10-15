@@ -59,3 +59,11 @@ def run_pipeline(payload: RunPipelinePayload = Body(...)):
         },
         "sample": sample
     }
+
+# --- Fix for Pydantic forward-ref bug on FastAPI + Pydantic v2 ---
+try:
+    RunPipelinePayload.model_rebuild(force=True)
+except Exception as e:
+    from .utils import logger
+    logger.warning(f"Schema rebuild failed: {e}")
+# -----------------------------------------------------------------
